@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GetterBot
+namespace GetterBot.DBModels
 {
     using System;
     using System.Collections.Generic;

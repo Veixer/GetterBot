@@ -59,32 +59,32 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="botget.cs">
+    <Compile Include="DBModels\botget.cs">
       <DependentUpon>GetterModel.tt</DependentUpon>
     </Compile>
     <Compile Include="CommandHandler.cs" />
     <Compile Include="DBClass.cs" />
-    <Compile Include="GetterModel.Context.cs">
+    <Compile Include="DBModels\GetterModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>GetterModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="GetterModel.cs">
+    <Compile Include="DBModels\GetterModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>GetterModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="GetterModel.Designer.cs">
+    <Compile Include="DBModels\GetterModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>GetterModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="get_type.cs">
+    <Compile Include="DBModels\get_type.cs">
       <DependentUpon>GetterModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="user.cs">
+    <Compile Include="DBModels\user.cs">
       <DependentUpon>GetterModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -92,22 +92,22 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <EntityDeploy Include="GetterModel.edmx">
+    <EntityDeploy Include="DBModels\GetterModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>GetterModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="GetterModel.edmx.diagram">
+    <None Include="DBModels\GetterModel.edmx.diagram">
       <DependentUpon>GetterModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="GetterModel.Context.tt">
+    <Content Include="DBModels\GetterModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>GetterModel.edmx</DependentUpon>
       <LastGenOutput>GetterModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="GetterModel.tt">
+    <Content Include="DBModels\GetterModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>GetterModel.edmx</DependentUpon>
       <LastGenOutput>GetterModel.cs</LastGenOutput>
