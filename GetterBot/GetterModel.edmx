@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TelegramGetertBotModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="botget">
+          <Key>
+            <PropertyRef Name="messageid" />
+          </Key>
+          <Property Name="messageid" Type="int" Nullable="false" />
+          <Property Name="userid" Type="int" />
+          <Property Name="get_date" Type="datetime" />
+          <Property Name="get_seconds" Type="int" />
+          <Property Name="get_weekday" Type="nvarchar" MaxLength="20" />
+          <Property Name="get_type_id" Type="int" />
+        </EntityType>
+        <EntityType Name="get_type">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="get_type_name" Type="nvarchar" MaxLength="10" />
+          <Property Name="get_type_hour" Type="int" />
+          <Property Name="get_type_minute" Type="int" />
+          <Property Name="get_enabled" Type="bit" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="250" />
+          <Property Name="userid" Type="int" />
+          <Property Name="languagecode" Type="nvarchar" MaxLength="100" />
+          <Property Name="firstname" Type="nvarchar" MaxLength="100" />
+          <Property Name="lastname" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK__botget__get_type__2A4B4B5E">
+          <End Role="get_type" Type="Self.get_type" Multiplicity="0..1" />
+          <End Role="botget" Type="Self.botget" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="get_type">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="botget">
+              <PropertyRef Name="get_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__botget__userid__29572725">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="botget" Type="Self.botget" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="botget">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TelegramGetertBotModelStoreContainer">
+          <EntitySet Name="botget" EntityType="Self.botget" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="get_type" EntityType="Self.get_type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__botget__get_type__2A4B4B5E" Association="Self.FK__botget__get_type__2A4B4B5E">
+            <End Role="get_type" EntitySet="get_type" />
+            <End Role="botget" EntitySet="botget" />
+          </AssociationSet>
+          <AssociationSet Name="FK__botget__userid__29572725" Association="Self.FK__botget__userid__29572725">
+            <End Role="users" EntitySet="users" />
+            <End Role="botget" EntitySet="botget" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TelegramGetertBotModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="botget">
+          <Key>
+            <PropertyRef Name="messageid" />
+          </Key>
+          <Property Name="messageid" Type="Int32" Nullable="false" />
+          <Property Name="userid" Type="Int32" />
+          <Property Name="get_date" Type="DateTime" Precision="3" />
+          <Property Name="get_seconds" Type="Int32" />
+          <Property Name="get_weekday" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="get_type_id" Type="Int32" />
+          <NavigationProperty Name="get_type" Relationship="Self.FK__botget__get_type__2A4B4B5E" FromRole="botget" ToRole="get_type" />
+          <NavigationProperty Name="user" Relationship="Self.FK__botget__userid__29572725" FromRole="botget" ToRole="users" />
+        </EntityType>
+        <EntityType Name="get_type">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="get_type_name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="get_type_hour" Type="Int32" />
+          <Property Name="get_type_minute" Type="Int32" />
+          <Property Name="get_enabled" Type="Boolean" />
+          <NavigationProperty Name="botgets" Relationship="Self.FK__botget__get_type__2A4B4B5E" FromRole="get_type" ToRole="botget" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="userid" Type="Int32" />
+          <Property Name="languagecode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="firstname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="lastname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="botgets" Relationship="Self.FK__botget__userid__29572725" FromRole="users" ToRole="botget" />
+        </EntityType>
+        <Association Name="FK__botget__get_type__2A4B4B5E">
+          <End Role="get_type" Type="Self.get_type" Multiplicity="0..1" />
+          <End Role="botget" Type="Self.botget" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="get_type">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="botget">
+              <PropertyRef Name="get_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__botget__userid__29572725">
+          <End Role="users" Type="Self.user" Multiplicity="0..1" />
+          <End Role="botget" Type="Self.botget" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="botget">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TelegramContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="botgets" EntityType="Self.botget" />
+          <EntitySet Name="get_type" EntityType="Self.get_type" />
+          <EntitySet Name="users" EntityType="Self.user" />
+          <AssociationSet Name="FK__botget__get_type__2A4B4B5E" Association="Self.FK__botget__get_type__2A4B4B5E">
+            <End Role="get_type" EntitySet="get_type" />
+            <End Role="botget" EntitySet="botgets" />
+          </AssociationSet>
+          <AssociationSet Name="FK__botget__userid__29572725" Association="Self.FK__botget__userid__29572725">
+            <End Role="users" EntitySet="users" />
+            <End Role="botget" EntitySet="botgets" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TelegramGetertBotModelStoreContainer" CdmEntityContainer="TelegramContext">
+          <EntitySetMapping Name="botgets">
+            <EntityTypeMapping TypeName="TelegramGetertBotModel.botget">
+              <MappingFragment StoreEntitySet="botget">
+                <ScalarProperty Name="messageid" ColumnName="messageid" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="get_date" ColumnName="get_date" />
+                <ScalarProperty Name="get_seconds" ColumnName="get_seconds" />
+                <ScalarProperty Name="get_weekday" ColumnName="get_weekday" />
+                <ScalarProperty Name="get_type_id" ColumnName="get_type_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="get_type">
+            <EntityTypeMapping TypeName="TelegramGetertBotModel.get_type">
+              <MappingFragment StoreEntitySet="get_type">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="get_type_name" ColumnName="get_type_name" />
+                <ScalarProperty Name="get_type_hour" ColumnName="get_type_hour" />
+                <ScalarProperty Name="get_type_minute" ColumnName="get_type_minute" />
+                <ScalarProperty Name="get_enabled" ColumnName="get_enabled" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="TelegramGetertBotModel.user">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="languagecode" ColumnName="languagecode" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
