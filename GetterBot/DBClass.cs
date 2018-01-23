@@ -1,6 +1,7 @@
 ﻿using GetterBot.DBModels;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,10 +29,24 @@ namespace GetterBot
 			{
 				using (var db = new TelegramContext())
 				{
-					var addGet = new botget { messageid = messageId, userid = userId, get_date = getDateTime, get_seconds = getSeconds, get_weekday = weekday, get_type_id = getTypeId };
-					db.botgets.Add(addGet);
-					db.SaveChanges();
-					Console.WriteLine("Getti lisätty");
+					DateTime today = DateTime.Now;
+					if (db.botgets.Where(b => b.get_type_id == getTypeId && DbFunctions.TruncateTime(b.get_date) == today.Date).Any())
+					{
+						Console.WriteLine("Tämä getti on jo olemassa");
+					}
+					else
+					{
+						var newGet = new botget { messageid = messageId,
+							userid = userId,
+							get_date = getDateTime,
+							get_seconds = getSeconds,
+							get_weekday = weekday,
+							get_type_id = getTypeId
+						};
+						db.botgets.Add(newGet);
+						db.SaveChanges();
+						Console.WriteLine("Getti lisätty");
+					}
 				}
 			}
 			
