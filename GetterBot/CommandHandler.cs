@@ -9,7 +9,7 @@ namespace GetterBot
 {
 	class CommandHandler : Program
 	{
-		public static void Bot_HandleMessage(object sender, MessageEventArgs e)
+		public static void BotHandleMessage(object sender, MessageEventArgs e)
 		{
 			string command = e.Message.Text.ToLower();
 
@@ -29,6 +29,7 @@ namespace GetterBot
 		private static void HandleGet(MessageEventArgs e)
 		{
 			Bot.SendTextMessageAsync(e.Message.Chat.Id, "Nice get", Telegram.Bot.Types.Enums.ParseMode.Default, false, false, e.Message.MessageId);
+			DBClass.AddUser(e);
 			DBClass.AddGet(e);
 		}
 	}
