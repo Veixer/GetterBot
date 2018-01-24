@@ -23,6 +23,7 @@ namespace GetterBot
 
 			if (getTypeId == 0)
 			{
+				CommandHandler.Reply(e, "Gettiä ei lisätty, väärä aika");
 				Console.WriteLine("Gettiä ei lisätty, väärä aika");
 			}
 			else
@@ -32,6 +33,7 @@ namespace GetterBot
 					DateTime today = DateTime.Now;
 					if (db.botgets.Where(b => b.get_type_id == getTypeId && DbFunctions.TruncateTime(b.get_date) == today.Date).Any())
 					{
+						CommandHandler.Reply(e, "Tämä getti on jo olemassa");
 						Console.WriteLine("Tämä getti on jo olemassa");
 					}
 					else
@@ -45,6 +47,7 @@ namespace GetterBot
 						};
 						db.botgets.Add(newGet);
 						db.SaveChanges();
+						CommandHandler.Reply(e, "Getti lisätty");
 						Console.WriteLine("Getti lisätty");
 					}
 				}
