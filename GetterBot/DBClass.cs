@@ -94,6 +94,15 @@ namespace GetterBot
 			}
 		}
 
+		public static string GetTopGetters(MessageEventArgs e)
+		{
+			using (var db = new TelegramContext())
+			{
+
+
+				return "";
+			}
+		}
 
 
 

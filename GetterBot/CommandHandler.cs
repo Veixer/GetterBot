@@ -18,8 +18,9 @@ namespace GetterBot
 				case "get":
 					HandleGet(e);
 					break;
-				case "top":
-					Bot.SendTextMessageAsync(e.Message.Chat.Id, "Top gets");
+				case "/top":
+				case "/top@getti_bot":
+					Bot.SendTextMessageAsync(e.Message.Chat.Id, HandleTop(e));
 					break;
 				default:
 					break;
@@ -28,9 +29,19 @@ namespace GetterBot
 
 		private static void HandleGet(MessageEventArgs e)
 		{
-			Bot.SendTextMessageAsync(e.Message.Chat.Id, "Nice get", Telegram.Bot.Types.Enums.ParseMode.Default, false, false, e.Message.MessageId);
+			//Bot.SendTextMessageAsync(e.Message.Chat.Id, "Nice get", Telegram.Bot.Types.Enums.ParseMode.Default, false, false, e.Message.MessageId);
 			DBClass.AddUser(e);
 			DBClass.AddGet(e);
+		}
+
+		private static string HandleTop(MessageEventArgs e)
+		{
+			return DBClass.GetTopGetters(e);
+		}
+
+		public static void Reply(MessageEventArgs e, string message)
+		{
+			Bot.SendTextMessageAsync(e.Message.Chat.Id, message, Telegram.Bot.Types.Enums.ParseMode.Default, false, false, e.Message.MessageId);
 		}
 	}
 }
