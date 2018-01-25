@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -113,6 +114,36 @@ namespace GetterBot
 				string topGettersMessage = "Top gettaajat:" + Environment.NewLine + "#/Etunimi/Sukunimi/Username" + Environment.NewLine + topGetters;
 
 				return topGettersMessage;
+			}
+		}
+
+		public static string FindClosestGet()
+		{
+			using (var db = new TelegramBotContext())
+			{
+				var gets = from g in db.get_type
+						   select g.get_type_name;
+
+				List<double> getTimes = new List<double>();
+				double timeNow = DateTime.Now.TimeOfDay.TotalSeconds;
+
+				foreach (var get in gets)
+				{
+					getTimes.Add(DateTime.Parse(get).TimeOfDay.TotalSeconds);
+				}
+
+				double closest = getTimes.Where(o => o > timeNow).OrderBy(i => Math.Abs(timeNow - i)).FirstOrDefault();
+
+				TimeSpan timespan = TimeSpan.FromSeconds(closest);
+				string hours = (timespan.Hours.ToString().Length < 10) ? "0" + timespan.Hours.ToString() : timespan.Hours.ToString();
+				string minutes = (timespan.Minutes.ToString().Length < 10) ? "0" + timespan.Hours.ToString() : timespan.Hours.ToString();
+
+
+
+
+				string nextGet = closest.ToString(hours + ":" + minutes);
+
+				return nextGet;
 			}
 		}
 
