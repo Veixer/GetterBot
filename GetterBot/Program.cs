@@ -20,7 +20,7 @@ namespace GetterBot
 
 		private static void StartProgram()
 		{
-			Bot.OnMessage += CommandHandler.Bot_HandleMessage;
+			Bot.OnMessage += CommandHandler.BotHandleMessage;
 
 			Bot.StartReceiving();
 			Console.WriteLine("Ohjelma käynnistetty, paina ENTER sulkeaksesi");

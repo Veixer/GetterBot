@@ -13,10 +13,10 @@ namespace GetterBot.DBModels
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class TelegramContext : DbContext
+    public partial class TelegramBotContext : DbContext
     {
-        public TelegramContext()
-            : base("name=TelegramContext")
+        public TelegramBotContext()
+            : base("name=TelegramBotContext")
         {
         }
     
@@ -28,5 +28,6 @@ namespace GetterBot.DBModels
         public virtual DbSet<botget> botgets { get; set; }
         public virtual DbSet<get_type> get_type { get; set; }
         public virtual DbSet<user> users { get; set; }
+        public virtual DbSet<top_gets> top_gets { get; set; }
     }
 }

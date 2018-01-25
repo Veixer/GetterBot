@@ -9,7 +9,7 @@ namespace GetterBot
 {
 	class CommandHandler : Program
 	{
-		public static void Bot_HandleMessage(object sender, MessageEventArgs e)
+		public static void BotHandleMessage(object sender, MessageEventArgs e)
 		{
 			string command = e.Message.Text.ToLower();
 
@@ -18,8 +18,13 @@ namespace GetterBot
 				case "get":
 					HandleGet(e);
 					break;
-				case "top":
-					Bot.SendTextMessageAsync(e.Message.Chat.Id, "Top gets");
+				case "/top":
+				case "/top@getti_bot":
+					Bot.SendTextMessageAsync(e.Message.Chat.Id, HandleTop());
+					break;
+				case "/nextget":
+				case "/nextget@getti_bot":
+					Bot.SendTextMessageAsync(e.Message.Chat.Id, NextGet());
 					break;
 				default:
 					break;
@@ -28,8 +33,24 @@ namespace GetterBot
 
 		private static void HandleGet(MessageEventArgs e)
 		{
-			Bot.SendTextMessageAsync(e.Message.Chat.Id, "Nice get", Telegram.Bot.Types.Enums.ParseMode.Default, false, false, e.Message.MessageId);
+			//Bot.SendTextMessageAsync(e.Message.Chat.Id, "Nice get", Telegram.Bot.Types.Enums.ParseMode.Default, false, false, e.Message.MessageId);
+			DBClass.AddUser(e);
 			DBClass.AddGet(e);
+		}
+
+		private static string HandleTop()
+		{
+			return DBClass.GetTopGetters();
+		}
+
+		public static void Reply(MessageEventArgs e, string message)
+		{
+			Bot.SendTextMessageAsync(e.Message.Chat.Id, message, Telegram.Bot.Types.Enums.ParseMode.Default, false, false, e.Message.MessageId);
+		}
+
+		public static string NextGet()
+		{
+			return DBClass.FindClosestGet();
 		}
 	}
 }

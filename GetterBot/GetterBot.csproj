@@ -11,6 +11,22 @@
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish2\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -30,6 +46,18 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>E7E009D9B6A702AFFE68F65BB9B511AAF12B0075</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>GetterBot_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -60,61 +88,77 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DBModels\botget.cs">
-      <DependentUpon>GetterModel.tt</DependentUpon>
+      <DependentUpon>GetterBotModel.tt</DependentUpon>
     </Compile>
     <Compile Include="CommandHandler.cs" />
     <Compile Include="DBClass.cs" />
-    <Compile Include="DBModels\GetterModel.Context.cs">
+    <Compile Include="DBModels\GetterBotModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>GetterModel.Context.tt</DependentUpon>
+      <DependentUpon>GetterBotModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBModels\GetterModel.cs">
+    <Compile Include="DBModels\GetterBotModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>GetterModel.tt</DependentUpon>
+      <DependentUpon>GetterBotModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBModels\GetterModel.Designer.cs">
+    <Compile Include="DBModels\GetterBotModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>GetterModel.edmx</DependentUpon>
+      <DependentUpon>GetterBotModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="DBModels\get_type.cs">
-      <DependentUpon>GetterModel.tt</DependentUpon>
+      <DependentUpon>GetterBotModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DBModels\top_gets.cs">
+      <DependentUpon>GetterBotModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBModels\user.cs">
-      <DependentUpon>GetterModel.tt</DependentUpon>
+      <DependentUpon>GetterBotModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <EntityDeploy Include="DBModels\GetterModel.edmx">
+    <EntityDeploy Include="DBModels\GetterBotModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>GetterModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>GetterBotModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="DBModels\GetterModel.edmx.diagram">
-      <DependentUpon>GetterModel.edmx</DependentUpon>
+    <None Include="DBModels\GetterBotModel.edmx.diagram">
+      <DependentUpon>GetterBotModel.edmx</DependentUpon>
     </None>
+    <None Include="GetterBot_TemporaryKey.pfx" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DBModels\GetterModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>GetterModel.edmx</DependentUpon>
-      <LastGenOutput>GetterModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="DBModels\GetterModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>GetterModel.edmx</DependentUpon>
-      <LastGenOutput>GetterModel.cs</LastGenOutput>
-    </Content>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DBModels\GetterBotModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>GetterBotModel.edmx</DependentUpon>
+      <LastGenOutput>GetterBotModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DBModels\GetterBotModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>GetterBotModel.edmx</DependentUpon>
+      <LastGenOutput>GetterBotModel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

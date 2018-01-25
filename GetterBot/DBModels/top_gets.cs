@@ -12,22 +12,12 @@ namespace GetterBot.DBModels
     using System;
     using System.Collections.Generic;
     
-    public partial class user
+    public partial class top_gets
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public user()
-        {
-            this.botgets = new HashSet<botget>();
-        }
-    
-        public int id { get; set; }
-        public string username { get; set; }
         public int userid { get; set; }
-        public string languagecode { get; set; }
         public string firstname { get; set; }
         public string lastname { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<botget> botgets { get; set; }
+        public string username { get; set; }
+        public Nullable<int> usergets { get; set; }
     }
 }
