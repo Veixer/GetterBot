@@ -28,7 +28,7 @@ namespace GetterBot
 			}
 			else
 			{
-				using (var db = new TelegramContext())
+				using (var db = new TelegramBotContext())
 				{
 					DateTime today = DateTime.Now;
 					if (db.botgets.Where(b => b.get_type_id == getTypeId && DbFunctions.TruncateTime(b.get_date) == today.Date).Any())
@@ -63,7 +63,7 @@ namespace GetterBot
 			string firstName = e.Message.From.FirstName;
 			string lastName = e.Message.From.LastName;
 
-			using (var db = new TelegramContext())
+			using (var db = new TelegramBotContext())
 			{
 				if (db.users.Where(u => u.userid == userId).Any())
 				{
@@ -81,7 +81,7 @@ namespace GetterBot
 
 		public static int FindGetType(string time)
 		{
-			using (var db = new TelegramContext())
+			using (var db = new TelegramBotContext())
 			{				
 				if (db.get_type.Where(gt => gt.get_type_name == time).Any())
 				{
@@ -94,13 +94,25 @@ namespace GetterBot
 			}
 		}
 
-		public static string GetTopGetters(MessageEventArgs e)
+		public static string GetTopGetters()
 		{
-			using (var db = new TelegramContext())
+			using (var db = new TelegramBotContext())
 			{
+				var top = from t in db.top_gets
+						  orderby t.usergets descending
+						  select t;
 
+				string topGetters = "";
+				Console.WriteLine("Top-lista haettu");
 
-				return "";
+				foreach (var topgetter in top)
+				{
+					topGetters = topGetters + topgetter.usergets + " | " + topgetter.firstname + " " + topgetter.lastname + " @" + topgetter.username + Environment.NewLine;
+				}
+
+				string topGettersMessage = "Top gettaajat:" + Environment.NewLine + "#/Etunimi/Sukunimi/Username" + Environment.NewLine + topGetters;
+
+				return topGettersMessage;
 			}
 		}
 
