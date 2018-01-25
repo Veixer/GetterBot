@@ -133,15 +133,10 @@ namespace GetterBot
 				}
 
 				double closest = getTimes.Where(o => o > timeNow).OrderBy(i => Math.Abs(timeNow - i)).FirstOrDefault();
-
 				TimeSpan timespan = TimeSpan.FromSeconds(closest);
-				string hours = (timespan.Hours.ToString().Length < 10) ? "0" + timespan.Hours.ToString() : timespan.Hours.ToString();
-				string minutes = (timespan.Minutes.ToString().Length < 10) ? "0" + timespan.Hours.ToString() : timespan.Hours.ToString();
-
-
-
-
-				string nextGet = "Seuraava getti on: " + closest.ToString(hours + ":" + minutes);
+				string hours = (timespan.Hours.ToString().Length < 2) ? "0" + timespan.Hours.ToString() : timespan.Hours.ToString();
+				string minutes = (timespan.Minutes.ToString().Length < 2) ? "0" + timespan.Minutes.ToString() : timespan.Minutes.ToString();
+				string nextGet = "Seuraava getti on: " + hours + ":" + minutes;
 
 				return nextGet;
 			}
