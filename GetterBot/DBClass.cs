@@ -108,7 +108,7 @@ namespace GetterBot
 
 				foreach (var topgetter in top)
 				{
-					topGetters = topGetters + topgetter.usergets + " | " + topgetter.firstname + " " + topgetter.lastname + " @" + topgetter.username + Environment.NewLine;
+					topGetters = topGetters + topgetter.usergets + " | " + topgetter.firstname + " " + topgetter.lastname + " " + topgetter.username + Environment.NewLine;
 				}
 
 				string topGettersMessage = "Top gettaajat:" + Environment.NewLine + "#/Etunimi/Sukunimi/Username" + Environment.NewLine + topGetters;
@@ -141,7 +141,7 @@ namespace GetterBot
 
 
 
-				string nextGet = closest.ToString(hours + ":" + minutes);
+				string nextGet = "Seuraava getti on: " + closest.ToString(hours + ":" + minutes);
 
 				return nextGet;
 			}
