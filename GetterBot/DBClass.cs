@@ -21,6 +21,8 @@ namespace GetterBot
 			string weekday = getDateTime.DayOfWeek.ToString();
 			string getTime = getDateTime.ToString("HH:mm");
 			int getTypeId = FindGetType(getTime);
+			int chatId = (int)e.Message.Chat.Id;
+			string chatTitle = e.Message.Chat.Title;
 
 			if (getTypeId == 0)
 			{
@@ -32,7 +34,7 @@ namespace GetterBot
 				using (var db = new TelegramBotContext())
 				{
 					DateTime today = DateTime.Now;
-					if (db.botgets.Where(b => b.get_type_id == getTypeId && DbFunctions.TruncateTime(b.get_date) == today.Date).Any())
+					if (db.botgets.Where(b => b.get_type_id == getTypeId && DbFunctions.TruncateTime(b.get_date) == today.Date && b.chatid == chatId).Any())
 					{
 						CommandHandler.Reply(e, "Tämä getti on jo olemassa");
 						Console.WriteLine("Tämä getti on jo olemassa");
@@ -44,7 +46,9 @@ namespace GetterBot
 							get_date = getDateTime,
 							get_seconds = getSeconds,
 							get_weekday = weekday,
-							get_type_id = getTypeId
+							get_type_id = getTypeId,
+							chatid = chatId,
+							chattitle = chatTitle
 						};
 						db.botgets.Add(newGet);
 						db.SaveChanges();
@@ -95,11 +99,14 @@ namespace GetterBot
 			}
 		}
 
-		public static string GetTopGetters()
+		public static string GetTopGetters(MessageEventArgs e)
 		{
+			int chatId = (int)e.Message.Chat.Id;
+
 			using (var db = new TelegramBotContext())
 			{
 				var top = from t in db.top_gets
+						  where t.chatid == chatId
 						  orderby t.usergets descending
 						  select t;
 
@@ -108,7 +115,7 @@ namespace GetterBot
 
 				foreach (var topgetter in top)
 				{
-					topGetters = topGetters + topgetter.usergets + " | " + topgetter.firstname + " " + topgetter.lastname + " @" + topgetter.username + Environment.NewLine;
+					topGetters = topGetters + topgetter.usergets + " | " + topgetter.firstname + " " + topgetter.lastname + " " + topgetter.username + Environment.NewLine;
 				}
 
 				string topGettersMessage = "Top gettaajat:" + Environment.NewLine + "#/Etunimi/Sukunimi/Username" + Environment.NewLine + topGetters;
@@ -133,15 +140,10 @@ namespace GetterBot
 				}
 
 				double closest = getTimes.Where(o => o > timeNow).OrderBy(i => Math.Abs(timeNow - i)).FirstOrDefault();
-
 				TimeSpan timespan = TimeSpan.FromSeconds(closest);
-				string hours = (timespan.Hours.ToString().Length < 10) ? "0" + timespan.Hours.ToString() : timespan.Hours.ToString();
-				string minutes = (timespan.Minutes.ToString().Length < 10) ? "0" + timespan.Hours.ToString() : timespan.Hours.ToString();
-
-
-
-
-				string nextGet = closest.ToString(hours + ":" + minutes);
+				string hours = (timespan.Hours.ToString().Length < 2) ? "0" + timespan.Hours.ToString() : timespan.Hours.ToString();
+				string minutes = (timespan.Minutes.ToString().Length < 2) ? "0" + timespan.Minutes.ToString() : timespan.Minutes.ToString();
+				string nextGet = "Seuraava getti on: " + hours + ":" + minutes;
 
 				return nextGet;
 			}

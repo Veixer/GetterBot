@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TelegramGetBotModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TelegramGetBotModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="botget">
           <Key>
             <PropertyRef Name="messageid" />
@@ -15,6 +15,8 @@
           <Property Name="get_seconds" Type="int" />
           <Property Name="get_weekday" Type="nvarchar" MaxLength="20" />
           <Property Name="get_type_id" Type="int" />
+          <Property Name="chatid" Type="int" />
+          <Property Name="chattitle" Type="nvarchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="get_type">
           <Key>
@@ -48,6 +50,7 @@ warning 6002: The table/view 'TelegramGetBot.dbo.top_gets' does not have a prima
           <Property Name="lastname" Type="nvarchar" MaxLength="100" />
           <Property Name="username" Type="nvarchar" MaxLength="250" />
           <Property Name="usergets" Type="int" />
+          <Property Name="chatid" Type="int" />
         </EntityType>
         <Association Name="FK__botget__get_type__2A4B4B5E">
           <End Role="get_type" Type="Self.get_type" Multiplicity="0..1" />
@@ -83,7 +86,8 @@ warning 6002: The table/view 'TelegramGetBot.dbo.top_gets' does not have a prima
     [top_gets].[firstname] AS [firstname], 
     [top_gets].[lastname] AS [lastname], 
     [top_gets].[username] AS [username], 
-    [top_gets].[usergets] AS [usergets]
+    [top_gets].[usergets] AS [usergets], 
+    [top_gets].[chatid] AS [chatid]
     FROM [dbo].[top_gets] AS [top_gets]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK__botget__get_type__2A4B4B5E" Association="Self.FK__botget__get_type__2A4B4B5E">
@@ -95,8 +99,7 @@ warning 6002: The table/view 'TelegramGetBot.dbo.top_gets' does not have a prima
             <End Role="botget" EntitySet="botget" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TelegramGetBotModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -112,6 +115,8 @@ warning 6002: The table/view 'TelegramGetBot.dbo.top_gets' does not have a prima
           <Property Name="get_type_id" Type="Int32" />
           <NavigationProperty Name="get_type" Relationship="Self.FK__botget__get_type__2A4B4B5E" FromRole="botget" ToRole="get_type" />
           <NavigationProperty Name="user" Relationship="Self.FK__botget__userid__300424B4" FromRole="botget" ToRole="users" />
+          <Property Name="chatid" Type="Int32" />
+          <Property Name="chattitle" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="get_type">
           <Key>
@@ -145,6 +150,7 @@ warning 6002: The table/view 'TelegramGetBot.dbo.top_gets' does not have a prima
           <Property Name="lastname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="username" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="usergets" Type="Int32" />
+          <Property Name="chatid" Type="Int32" />
         </EntityType>
         <Association Name="FK__botget__get_type__2A4B4B5E">
           <End Role="get_type" Type="Self.get_type" Multiplicity="0..1" />
@@ -193,6 +199,8 @@ warning 6002: The table/view 'TelegramGetBot.dbo.top_gets' does not have a prima
           <EntitySetMapping Name="botgets">
             <EntityTypeMapping TypeName="TelegramGetBotModel.botget">
               <MappingFragment StoreEntitySet="botget">
+                <ScalarProperty Name="chattitle" ColumnName="chattitle" />
+                <ScalarProperty Name="chatid" ColumnName="chatid" />
                 <ScalarProperty Name="messageid" ColumnName="messageid" />
                 <ScalarProperty Name="userid" ColumnName="userid" />
                 <ScalarProperty Name="get_date" ColumnName="get_date" />
@@ -228,6 +236,7 @@ warning 6002: The table/view 'TelegramGetBot.dbo.top_gets' does not have a prima
           <EntitySetMapping Name="top_gets">
             <EntityTypeMapping TypeName="TelegramGetBotModel.top_gets">
               <MappingFragment StoreEntitySet="top_gets">
+                <ScalarProperty Name="chatid" ColumnName="chatid" />
                 <ScalarProperty Name="userid" ColumnName="userid" />
                 <ScalarProperty Name="firstname" ColumnName="firstname" />
                 <ScalarProperty Name="lastname" ColumnName="lastname" />

@@ -20,7 +20,7 @@ namespace GetterBot
 					break;
 				case "/top":
 				case "/top@getti_bot":
-					Bot.SendTextMessageAsync(e.Message.Chat.Id, HandleTop());
+					Bot.SendTextMessageAsync(e.Message.Chat.Id, HandleTop(e));
 					break;
 				case "/nextget":
 				case "/nextget@getti_bot":
@@ -38,9 +38,9 @@ namespace GetterBot
 			DBClass.AddGet(e);
 		}
 
-		private static string HandleTop()
+		private static string HandleTop(MessageEventArgs e)
 		{
-			return DBClass.GetTopGetters();
+			return DBClass.GetTopGetters(e);
 		}
 
 		public static void Reply(MessageEventArgs e, string message)
