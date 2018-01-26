@@ -21,6 +21,8 @@ namespace GetterBot
 			string weekday = getDateTime.DayOfWeek.ToString();
 			string getTime = getDateTime.ToString("HH:mm");
 			int getTypeId = FindGetType(getTime);
+			int chatId = (int)e.Message.Chat.Id;
+			string chatTitle = e.Message.Chat.Title;
 
 			if (getTypeId == 0)
 			{
@@ -32,7 +34,7 @@ namespace GetterBot
 				using (var db = new TelegramBotContext())
 				{
 					DateTime today = DateTime.Now;
-					if (db.botgets.Where(b => b.get_type_id == getTypeId && DbFunctions.TruncateTime(b.get_date) == today.Date).Any())
+					if (db.botgets.Where(b => b.get_type_id == getTypeId && DbFunctions.TruncateTime(b.get_date) == today.Date && b.chatid == chatId).Any())
 					{
 						CommandHandler.Reply(e, "Tämä getti on jo olemassa");
 						Console.WriteLine("Tämä getti on jo olemassa");
@@ -44,7 +46,9 @@ namespace GetterBot
 							get_date = getDateTime,
 							get_seconds = getSeconds,
 							get_weekday = weekday,
-							get_type_id = getTypeId
+							get_type_id = getTypeId,
+							chatid = chatId,
+							chattitle = chatTitle
 						};
 						db.botgets.Add(newGet);
 						db.SaveChanges();
@@ -95,11 +99,14 @@ namespace GetterBot
 			}
 		}
 
-		public static string GetTopGetters()
+		public static string GetTopGetters(MessageEventArgs e)
 		{
+			int chatId = (int)e.Message.Chat.Id;
+
 			using (var db = new TelegramBotContext())
 			{
 				var top = from t in db.top_gets
+						  where t.chatid == chatId
 						  orderby t.usergets descending
 						  select t;
 

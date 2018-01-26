@@ -20,6 +20,8 @@ namespace GetterBot.DBModels
         public Nullable<int> get_seconds { get; set; }
         public string get_weekday { get; set; }
         public Nullable<int> get_type_id { get; set; }
+        public Nullable<int> chatid { get; set; }
+        public string chattitle { get; set; }
     
         public virtual get_type get_type { get; set; }
         public virtual user user { get; set; }

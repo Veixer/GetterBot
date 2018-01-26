@@ -19,5 +19,6 @@ namespace GetterBot.DBModels
         public string lastname { get; set; }
         public string username { get; set; }
         public Nullable<int> usergets { get; set; }
+        public Nullable<int> chatid { get; set; }
     }
 }
