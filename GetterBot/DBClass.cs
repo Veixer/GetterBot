@@ -159,10 +159,20 @@ namespace GetterBot
 							  select gl.get_type_name;
 
 				string getDbList = "";
+				string nextGetRaw = FindClosestGet();
+				string nextGet = nextGetRaw.Substring(nextGetRaw.Length - 5);
 
 				foreach (var get in gList)
-				{
-					getDbList = getDbList + get + Environment.NewLine;
+				{					
+					if (get == nextGet)
+					{
+						getDbList = getDbList + get + " <-- Seuraava get" + Environment.NewLine;
+					}
+					else
+					{
+						getDbList = getDbList + get + Environment.NewLine;
+					}
+					
 				}
 
 				string getList = "Getit käytettävissä:" + Environment.NewLine + getDbList;
