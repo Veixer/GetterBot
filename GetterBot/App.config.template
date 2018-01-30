@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- DUPLICATE THIS TEMPLATE FILE AS App.config AND SET YOUR ENVIROMENT SPECIFIC INFORMATION INSTRUCTED BY COMMENTS BELOW -->
+<configuration>
+  <configSections>
+    <section name="entityFramework" type="System.Data.Entity.Internal.ConfigFile.EntityFrameworkSection, EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false" />
+  </configSections>
+  <startup>
+    <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.6.1" />
+  </startup>
+  <entityFramework>
+    <defaultConnectionFactory type="System.Data.Entity.Infrastructure.LocalDbConnectionFactory, EntityFramework">
+      <parameters>
+        <parameter value="mssqllocaldb" />
+      </parameters>
+    </defaultConnectionFactory>
+    <providers>
+      <provider invariantName="System.Data.SqlClient" type="System.Data.Entity.SqlServer.SqlProviderServices, EntityFramework.SqlServer" />
+    </providers>
+  </entityFramework>
+  <appSettings>
+    <!-- ADD YOUR DATABASE CONNECTION STRING BELOW -->
+    <add key="Telegramkey" value="<your-telegram-bot-key>" />
+  </appSettings>
+  <connectionStrings>
+  <!-- ADD YOUR DATABASE CONNECTION STRING BELOW -->
+    <add name="TelegramBotContext" connectionString="<your-db-connection-string>" providerName="System.Data.EntityClient" />
+  </connectionStrings>
+</configuration>
