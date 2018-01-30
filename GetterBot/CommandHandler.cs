@@ -26,6 +26,9 @@ namespace GetterBot
 				case "/nextget@getti_bot":
 					Bot.SendTextMessageAsync(e.Message.Chat.Id, NextGet());
 					break;
+				case "/getlist":
+					Bot.SendTextMessageAsync(e.Message.Chat.Id, GetList());
+					break;
 				default:
 					break;
 			}
@@ -33,7 +36,6 @@ namespace GetterBot
 
 		private static void HandleGet(MessageEventArgs e)
 		{
-			//Bot.SendTextMessageAsync(e.Message.Chat.Id, "Nice get", Telegram.Bot.Types.Enums.ParseMode.Default, false, false, e.Message.MessageId);
 			DBClass.AddUser(e);
 			DBClass.AddGet(e);
 		}
@@ -51,6 +53,11 @@ namespace GetterBot
 		public static string NextGet()
 		{
 			return DBClass.FindClosestGet();
+		}
+
+		public static string GetList()
+		{
+			return DBClass.GetGetList();
 		}
 	}
 }
