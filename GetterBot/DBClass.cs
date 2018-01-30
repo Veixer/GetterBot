@@ -149,6 +149,27 @@ namespace GetterBot
 			}
 		}
 
+		public static string GetGetList()
+		{
+			using (var db = new TelegramBotContext())
+			{
+				var gList = from gl in db.get_type
+							  where gl.get_enabled == true
+							  orderby gl.get_type_hour, gl.get_type_minute
+							  select gl.get_type_name;
+
+				string getDbList = "";
+
+				foreach (var get in gList)
+				{
+					getDbList = getDbList + get + Environment.NewLine;
+				}
+
+				string getList = "Getit käytettävissä:" + Environment.NewLine + getDbList;
+
+				return getList;
+			}
+		}
 
 
 	}
