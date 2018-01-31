@@ -52,7 +52,7 @@ namespace GetterBot
 						};
 						db.botgets.Add(newGet);
 						db.SaveChanges();
-						CommandHandler.Reply(e, "Getti lisätty");
+						CommandHandler.Reply(e, "Getti lisätty. Onnistuit gettaamaan " + getSeconds + " sekunnissa!");
 						Console.WriteLine("Getti lisätty");
 					}
 				}
