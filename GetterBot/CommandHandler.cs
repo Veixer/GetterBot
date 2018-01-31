@@ -27,6 +27,7 @@ namespace GetterBot
 					Bot.SendTextMessageAsync(e.Message.Chat.Id, NextGet());
 					break;
 				case "/getlist":
+				case "/getlist@getti_bot":
 					Bot.SendTextMessageAsync(e.Message.Chat.Id, GetList());
 					break;
 				default:
