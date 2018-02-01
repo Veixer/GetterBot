@@ -40,11 +40,11 @@ List of keywords and commands that the bot listens to.
 | `/getlist` | List of all possible points of time available for getting | 
 
 #### TODO
-- [ ] Instructions on setting up project on visual studio
-- [ ] Cooldown - a cooldown so that a user can only get once every 10-15 seconds
-- [ ] `/help` command for displaying all possible and needed info
-- [ ] `/stats` & `/statsme` general stats list for channel/certain user
-- 
+- Instructions on setting up project on visual studio
+- Cooldown - a cooldown so that a user can only get once every 10-15 seconds
+- `/help` command for displaying all possible and needed info
+- `/stats` & `/statsme` general stats list for channel/certain user
+ 
 #### Hall of Fame (List of Contributor)
 [@Veixer](https://github.com/Veixer/) - Creator of the project
 [@Rantti](https://github.com/Rantti/) - Wrote this readme and helped planning
