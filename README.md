@@ -31,13 +31,15 @@ After the last command you should be able to navigate to `[project_root]/bin/Deb
 You start by adding the bot to the group which you would like to conduct observations on time-getting.
 
 ### Command List
+
 List of keywords and commands that the bot listens to.
-| Command    | Description                                               |
-|:----------:|-----------------------------------------------------------| 
-| `get`      | Assign get. Not a command, just text is accepted          | 
-| `/top`     | Output scoreboard of getters                              | 
-| `/nextget` | Output which point of time is next get possible.          | 
-| `/getlist` | List of all possible points of time available for getting | 
+
+| Command | Description |
+| --- | --- | 
+| `get` | Assign get. Not a command, just text is accepted | 
+| `/top` | Output scoreboard of getters | 
+| `/nextget` | Output which point of time is next get possible. | 
+| `/getlist` | List of all possible points of time available for getting |
 
 #### TODO
 - Instructions on setting up project on visual studio
