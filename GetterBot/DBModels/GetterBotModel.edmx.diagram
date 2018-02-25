@@ -11,6 +11,11 @@
         <EntityTypeShape EntityType="TelegramGetBotModel.top_gets" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
         <AssociationConnector Association="TelegramGetBotModel.FK__botget__get_type__2A4B4B5E" ManuallyRouted="false" />
         <AssociationConnector Association="TelegramGetBotModel.FK__botget__userid__300424B4" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TelegramGetBotModel.most_getted_type" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="TelegramGetBotModel.most_dankgets" Width="1.5" PointX="5.375" PointY="3.75" />
+        <EntityTypeShape EntityType="TelegramGetBotModel.most_getted_weekday" Width="1.5" PointX="5.375" PointY="6.75" />
+        <EntityTypeShape EntityType="TelegramGetBotModel.most_leetgets" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="TelegramGetBotModel.most_truedankgets" Width="1.5" PointX="7.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

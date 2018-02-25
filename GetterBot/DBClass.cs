@@ -166,7 +166,7 @@ namespace GetterBot
 				{					
 					if (get == nextGet)
 					{
-						getDbList = getDbList + get + " <-- Seuraava get" + Environment.NewLine;
+						getDbList = getDbList + "*" + get + " <-- Seuraava get*" + Environment.NewLine;
 					}
 					else
 					{
@@ -175,11 +175,79 @@ namespace GetterBot
 					
 				}
 
-				string getList = "Getit käytettävissä:" + Environment.NewLine + getDbList;
+				string getList = "*Getit käytettävissä:*" + Environment.NewLine + getDbList;
 
 				return getList;
 			}
 		}
+
+
+
+		public static string GetGlobalStats(MessageEventArgs e)
+		{
+			using (var db = new TelegramBotContext())
+			{
+				string globalStats = "";
+				var addLine = Environment.NewLine;
+
+				var getCount = db.botgets.Count();				
+				var channelGetCount = db.botgets.Where(x => x.chatid == e.Message.Chat.Id).Count();
+				var mostGettedType = db.most_getted_type;
+				var mostGettedWeekday = db.most_getted_weekday;
+				var globalGetTimeAverage = db.botgets.Select(r => r.get_seconds).Average();
+				var channelGetTimeAverage = db.botgets.Where(og => og.chatid == e.Message.Chat.Id).Select(g => g.get_seconds).Average();
+				var mostDankGets = db.most_dankgets;
+				var mostTrueDankGets = db.most_truedankgets;
+				var mostLeetGets = db.most_leetgets;
+				
+				string gCount = "Yleinen gettimäärä" + addLine + "- " + getCount.ToString() + addLine + addLine;
+				string cGetCount = "Kanavan gettimäärä" + addLine + "- " + channelGetCount.ToString() + addLine + addLine;
+				string mGettedType = "Yleisin getti";
+				string mGettedWeekday = "Yleisin gettipäivä";
+				string gGetTimeAverage = "Yleinen getin keskiarvo" + addLine + "- " + globalGetTimeAverage.ToString() + "s" + addLine + addLine;
+				string cGetTimeAverage = "Kanavan getin keskiarvo" + addLine + "- " + channelGetTimeAverage.ToString() + "s" + addLine + addLine;
+				string mDankGets = "Eniten 16:20 gettejä kanavalla";
+				string mTrueDankGets = "Eniten 4:20 gettejä kanavalla";
+				string mLeetGets = "Eniten 13:37 gettejä kanavalla";
+				
+
+				
+
+				foreach (var mgt in mostGettedType)
+				{
+					mGettedType = mGettedType + addLine + "- " + mgt.get_type_name;
+				}
+
+				foreach (var mgw in mostGettedWeekday)
+				{
+					mGettedWeekday = mGettedWeekday + addLine + "- " + mgw.get_weekday;
+				}
+
+				foreach (var mdg in mostDankGets)
+				{
+					mDankGets = mDankGets + addLine + "- " + mdg.firstname + " " + mdg.lastname + " " + mdg.username;
+				}
+
+				foreach (var mtdg in mostTrueDankGets)
+				{
+					mTrueDankGets = mTrueDankGets + addLine + "- " + mtdg.firstname + " " + mtdg.lastname + " " + mtdg.username;
+				}
+
+				foreach (var mlg in mostLeetGets)
+				{
+					mLeetGets = mLeetGets + addLine + "- " + mlg.firstname + " " + mlg.lastname + " " + mlg.username;
+				}
+
+				globalStats = "*~~~ STATISTICS ~~~*" + addLine +  addLine + gCount + cGetCount + mGettedType + addLine + addLine + mGettedWeekday + addLine + addLine + gGetTimeAverage + cGetTimeAverage + mDankGets + addLine + addLine + mTrueDankGets + addLine + addLine + mLeetGets;
+
+
+
+				return globalStats;
+			}
+		}
+
+
+
 
 
 	}

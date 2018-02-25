@@ -28,7 +28,11 @@ namespace GetterBot
 					break;
 				case "/getlist":
 				case "/getlist@getti_bot":
-					Bot.SendTextMessageAsync(e.Message.Chat.Id, GetList());
+					Bot.SendTextMessageAsync(e.Message.Chat.Id, GetList(), Telegram.Bot.Types.Enums.ParseMode.Markdown);
+					break;
+				case "/stats":
+				case "/stats@getti_bot":
+					Bot.SendTextMessageAsync(e.Message.Chat.Id, GlobalStats(e), Telegram.Bot.Types.Enums.ParseMode.Markdown);
 					break;
 				default:
 					break;
@@ -59,6 +63,11 @@ namespace GetterBot
 		public static string GetList()
 		{
 			return DBClass.GetGetList();
+		}
+
+		public static string GlobalStats(MessageEventArgs e)
+		{
+			return DBClass.GetGlobalStats(e);
 		}
 	}
 }

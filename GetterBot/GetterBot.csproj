@@ -22,7 +22,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>12</ApplicationRevision>
+    <ApplicationRevision>19</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -108,6 +108,21 @@
       <DependentUpon>GetterBotModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="DBModels\get_type.cs">
+      <DependentUpon>GetterBotModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModels\most_dankgets.cs">
+      <DependentUpon>GetterBotModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModels\most_getted_type.cs">
+      <DependentUpon>GetterBotModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModels\most_getted_weekday.cs">
+      <DependentUpon>GetterBotModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModels\most_leetgets.cs">
+      <DependentUpon>GetterBotModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModels\most_truedankgets.cs">
       <DependentUpon>GetterBotModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />

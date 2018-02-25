@@ -40,6 +40,64 @@
           <Property Name="lastname" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'TelegramGetBot.dbo.most_dankgets' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="most_dankgets">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="dankcount" Type="int" />
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="250" />
+          <Property Name="userid" Type="int" />
+          <Property Name="firstname" Type="nvarchar" MaxLength="100" />
+          <Property Name="lastname" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TelegramGetBot.dbo.most_getted_type' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="most_getted_type">
+          <Key>
+            <PropertyRef Name="get_type_id" />
+          </Key>
+          <Property Name="get_type_id" Type="int" Nullable="false" />
+          <Property Name="get_type_count" Type="int" />
+          <Property Name="get_type_name" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TelegramGetBot.dbo.most_getted_weekday' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="most_getted_weekday">
+          <Key>
+            <PropertyRef Name="get_weekday" />
+          </Key>
+          <Property Name="get_weekday" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="wd_count" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TelegramGetBot.dbo.most_leetgets' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="most_leetgets">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="leetcount" Type="int" />
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="250" />
+          <Property Name="userid" Type="int" />
+          <Property Name="firstname" Type="nvarchar" MaxLength="100" />
+          <Property Name="lastname" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TelegramGetBot.dbo.most_truedankgets' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="most_truedankgets">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="truedankcount" Type="int" />
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="250" />
+          <Property Name="userid" Type="int" />
+          <Property Name="firstname" Type="nvarchar" MaxLength="100" />
+          <Property Name="lastname" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'TelegramGetBot.dbo.top_gets' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="top_gets">
           <Key>
@@ -80,6 +138,49 @@ warning 6002: The table/view 'TelegramGetBot.dbo.top_gets' does not have a prima
           <EntitySet Name="botget" EntityType="Self.botget" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="get_type" EntityType="Self.get_type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="most_dankgets" EntityType="Self.most_dankgets" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [most_dankgets].[dankcount] AS [dankcount], 
+    [most_dankgets].[id] AS [id], 
+    [most_dankgets].[username] AS [username], 
+    [most_dankgets].[userid] AS [userid], 
+    [most_dankgets].[firstname] AS [firstname], 
+    [most_dankgets].[lastname] AS [lastname]
+    FROM [dbo].[most_dankgets] AS [most_dankgets]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="most_getted_type" EntityType="Self.most_getted_type" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [most_getted_type].[get_type_id] AS [get_type_id], 
+    [most_getted_type].[get_type_count] AS [get_type_count], 
+    [most_getted_type].[get_type_name] AS [get_type_name]
+    FROM [dbo].[most_getted_type] AS [most_getted_type]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="most_getted_weekday" EntityType="Self.most_getted_weekday" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [most_getted_weekday].[get_weekday] AS [get_weekday], 
+    [most_getted_weekday].[wd_count] AS [wd_count]
+    FROM [dbo].[most_getted_weekday] AS [most_getted_weekday]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="most_leetgets" EntityType="Self.most_leetgets" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [most_leetgets].[leetcount] AS [leetcount], 
+    [most_leetgets].[id] AS [id], 
+    [most_leetgets].[username] AS [username], 
+    [most_leetgets].[userid] AS [userid], 
+    [most_leetgets].[firstname] AS [firstname], 
+    [most_leetgets].[lastname] AS [lastname]
+    FROM [dbo].[most_leetgets] AS [most_leetgets]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="most_truedankgets" EntityType="Self.most_truedankgets" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [most_truedankgets].[truedankcount] AS [truedankcount], 
+    [most_truedankgets].[id] AS [id], 
+    [most_truedankgets].[username] AS [username], 
+    [most_truedankgets].[userid] AS [userid], 
+    [most_truedankgets].[firstname] AS [firstname], 
+    [most_truedankgets].[lastname] AS [lastname]
+    FROM [dbo].[most_truedankgets] AS [most_truedankgets]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="top_gets" EntityType="Self.top_gets" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [top_gets].[userid] AS [userid], 
@@ -189,7 +290,60 @@ warning 6002: The table/view 'TelegramGetBot.dbo.top_gets' does not have a prima
             <End Role="users" EntitySet="users" />
             <End Role="botget" EntitySet="botgets" />
           </AssociationSet>
+          <EntitySet Name="most_getted_type" EntityType="TelegramGetBotModel.most_getted_type" />
+          <EntitySet Name="most_dankgets" EntityType="TelegramGetBotModel.most_dankgets" />
+          <EntitySet Name="most_getted_weekday" EntityType="TelegramGetBotModel.most_getted_weekday" />
+          <EntitySet Name="most_leetgets" EntityType="TelegramGetBotModel.most_leetgets" />
+          <EntitySet Name="most_truedankgets" EntityType="TelegramGetBotModel.most_truedankgets" />
         </EntityContainer>
+        <EntityType Name="most_getted_type">
+          <Key>
+            <PropertyRef Name="get_type_id" />
+          </Key>
+          <Property Name="get_type_id" Type="Int32" Nullable="false" />
+          <Property Name="get_type_count" Type="Int32" />
+          <Property Name="get_type_name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="most_dankgets">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="dankcount" Type="Int32" />
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="username" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="userid" Type="Int32" />
+          <Property Name="firstname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="lastname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="most_getted_weekday">
+          <Key>
+            <PropertyRef Name="get_weekday" />
+          </Key>
+          <Property Name="get_weekday" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="wd_count" Type="Int32" />
+        </EntityType>
+        <EntityType Name="most_leetgets">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="leetcount" Type="Int32" />
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="username" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="userid" Type="Int32" />
+          <Property Name="firstname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="lastname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="most_truedankgets">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="truedankcount" Type="Int32" />
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="username" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="userid" Type="Int32" />
+          <Property Name="firstname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="lastname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -242,6 +396,59 @@ warning 6002: The table/view 'TelegramGetBot.dbo.top_gets' does not have a prima
                 <ScalarProperty Name="lastname" ColumnName="lastname" />
                 <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="usergets" ColumnName="usergets" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="most_getted_type">
+            <EntityTypeMapping TypeName="TelegramGetBotModel.most_getted_type">
+              <MappingFragment StoreEntitySet="most_getted_type">
+                <ScalarProperty Name="get_type_name" ColumnName="get_type_name" />
+                <ScalarProperty Name="get_type_count" ColumnName="get_type_count" />
+                <ScalarProperty Name="get_type_id" ColumnName="get_type_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="most_dankgets">
+            <EntityTypeMapping TypeName="TelegramGetBotModel.most_dankgets">
+              <MappingFragment StoreEntitySet="most_dankgets">
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="dankcount" ColumnName="dankcount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="most_getted_weekday">
+            <EntityTypeMapping TypeName="TelegramGetBotModel.most_getted_weekday">
+              <MappingFragment StoreEntitySet="most_getted_weekday">
+                <ScalarProperty Name="wd_count" ColumnName="wd_count" />
+                <ScalarProperty Name="get_weekday" ColumnName="get_weekday" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="most_leetgets">
+            <EntityTypeMapping TypeName="TelegramGetBotModel.most_leetgets">
+              <MappingFragment StoreEntitySet="most_leetgets">
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="leetcount" ColumnName="leetcount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="most_truedankgets">
+            <EntityTypeMapping TypeName="TelegramGetBotModel.most_truedankgets">
+              <MappingFragment StoreEntitySet="most_truedankgets">
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="truedankcount" ColumnName="truedankcount" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
