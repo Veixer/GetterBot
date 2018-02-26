@@ -34,5 +34,6 @@ namespace GetterBot.DBModels
         public virtual DbSet<most_getted_weekday> most_getted_weekday { get; set; }
         public virtual DbSet<most_leetgets> most_leetgets { get; set; }
         public virtual DbSet<most_truedankgets> most_truedankgets { get; set; }
+        public virtual DbSet<get_messages> get_messages { get; set; }
     }
 }

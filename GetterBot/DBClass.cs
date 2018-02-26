@@ -52,7 +52,7 @@ namespace GetterBot
 						};
 						db.botgets.Add(newGet);
 						db.SaveChanges();
-						CommandHandler.Reply(e, "Getti lisätty. Onnistuit gettaamaan " + getSeconds + " sekunnissa!");
+						CommandHandler.Reply(e, GetMessage(getTypeId) + Environment.NewLine + " Onnistuit gettaamaan " + getSeconds + " sekunnissa!");
 						Console.WriteLine("Getti lisätty");
 					}
 				}
@@ -194,8 +194,8 @@ namespace GetterBot
 				var channelGetCount = db.botgets.Where(x => x.chatid == e.Message.Chat.Id).Count();
 				var mostGettedType = db.most_getted_type;
 				var mostGettedWeekday = db.most_getted_weekday;
-				var globalGetTimeAverage = db.botgets.Select(r => r.get_seconds).Average();
-				var channelGetTimeAverage = db.botgets.Where(og => og.chatid == e.Message.Chat.Id).Select(g => g.get_seconds).Average();
+				var globalGetTimeAverage = db.botgets.Select(r => r.get_seconds).Average().GetValueOrDefault(-999);
+				var channelGetTimeAverage = db.botgets.Where(og => og.chatid == e.Message.Chat.Id).Select(g => g.get_seconds).Average().GetValueOrDefault(-999);
 				var mostDankGets = db.most_dankgets;
 				var mostTrueDankGets = db.most_truedankgets;
 				var mostLeetGets = db.most_leetgets;
@@ -204,8 +204,8 @@ namespace GetterBot
 				string cGetCount = "Kanavan gettimäärä" + addLine + "- " + channelGetCount.ToString() + addLine + addLine;
 				string mGettedType = "Yleisin getti";
 				string mGettedWeekday = "Yleisin gettipäivä";
-				string gGetTimeAverage = "Yleinen getin keskiarvo" + addLine + "- " + globalGetTimeAverage.ToString() + "s" + addLine + addLine;
-				string cGetTimeAverage = "Kanavan getin keskiarvo" + addLine + "- " + channelGetTimeAverage.ToString() + "s" + addLine + addLine;
+				string gGetTimeAverage = "Yleinen getin keskiarvo" + addLine + "- " + Math.Round(globalGetTimeAverage, 2).ToString() + "s" + addLine + addLine;
+				string cGetTimeAverage = "Kanavan getin keskiarvo" + addLine + "- " + Math.Round(channelGetTimeAverage, 2).ToString() + "s" + addLine + addLine;
 				string mDankGets = "Eniten 16:20 gettejä kanavalla";
 				string mTrueDankGets = "Eniten 4:20 gettejä kanavalla";
 				string mLeetGets = "Eniten 13:37 gettejä kanavalla";
@@ -243,6 +243,16 @@ namespace GetterBot
 
 
 				return globalStats;
+			}
+		}
+
+		private static string GetMessage(int getTypeId)
+		{
+			using (var db = new TelegramBotContext())
+			{
+				var getMessage = db.get_messages.Where(x => x.get_type_id == getTypeId).Select(y => y.get_message).FirstOrDefault();
+
+				return getMessage;
 			}
 		}
 

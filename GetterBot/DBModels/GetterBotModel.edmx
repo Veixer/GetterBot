@@ -18,6 +18,15 @@
           <Property Name="chatid" Type="int" />
           <Property Name="chattitle" Type="nvarchar" MaxLength="150" />
         </EntityType>
+        <EntityType Name="get_messages">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="get_type_id" Type="int" />
+          <Property Name="get_message" Type="nvarchar" MaxLength="500" />
+          <Property Name="gm_enabled" Type="bit" />
+        </EntityType>
         <EntityType Name="get_type">
           <Key>
             <PropertyRef Name="id" />
@@ -134,8 +143,21 @@ warning 6002: The table/view 'TelegramGetBot.dbo.top_gets' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__get_messa__get_t__3E52440B">
+          <End Role="get_type" Type="Self.get_type" Multiplicity="0..1" />
+          <End Role="get_messages" Type="Self.get_messages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="get_type">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="get_messages">
+              <PropertyRef Name="get_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="TelegramGetBotModelStoreContainer">
           <EntitySet Name="botget" EntityType="Self.botget" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="get_messages" EntityType="Self.get_messages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="get_type" EntityType="Self.get_type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="most_dankgets" EntityType="Self.most_dankgets" store:Type="Views" store:Schema="dbo">
@@ -199,6 +221,10 @@ warning 6002: The table/view 'TelegramGetBot.dbo.top_gets' does not have a prima
             <End Role="users" EntitySet="users" />
             <End Role="botget" EntitySet="botget" />
           </AssociationSet>
+          <AssociationSet Name="FK__get_messa__get_t__3E52440B" Association="Self.FK__get_messa__get_t__3E52440B">
+            <End Role="get_type" EntitySet="get_type" />
+            <End Role="get_messages" EntitySet="get_messages" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -229,6 +255,7 @@ warning 6002: The table/view 'TelegramGetBot.dbo.top_gets' does not have a prima
           <Property Name="get_type_minute" Type="Int32" />
           <Property Name="get_enabled" Type="Boolean" />
           <NavigationProperty Name="botgets" Relationship="Self.FK__botget__get_type__2A4B4B5E" FromRole="get_type" ToRole="botget" />
+          <NavigationProperty Name="get_messages" Relationship="TelegramGetBotModel.FK__get_messa__get_t__3E52440B" FromRole="get_type" ToRole="get_messages" />
         </EntityType>
         <EntityType Name="user">
           <Key>
@@ -295,6 +322,11 @@ warning 6002: The table/view 'TelegramGetBot.dbo.top_gets' does not have a prima
           <EntitySet Name="most_getted_weekday" EntityType="TelegramGetBotModel.most_getted_weekday" />
           <EntitySet Name="most_leetgets" EntityType="TelegramGetBotModel.most_leetgets" />
           <EntitySet Name="most_truedankgets" EntityType="TelegramGetBotModel.most_truedankgets" />
+          <EntitySet Name="get_messages" EntityType="TelegramGetBotModel.get_messages" />
+          <AssociationSet Name="FK__get_messa__get_t__3E52440B" Association="TelegramGetBotModel.FK__get_messa__get_t__3E52440B">
+            <End Role="get_type" EntitySet="get_type" />
+            <End Role="get_messages" EntitySet="get_messages" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="most_getted_type">
           <Key>
@@ -344,6 +376,28 @@ warning 6002: The table/view 'TelegramGetBot.dbo.top_gets' does not have a prima
           <Property Name="firstname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="lastname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="get_messages">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="get_type_id" Type="Int32" />
+          <Property Name="get_message" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="gm_enabled" Type="Boolean" />
+          <NavigationProperty Name="get_type" Relationship="TelegramGetBotModel.FK__get_messa__get_t__3E52440B" FromRole="get_messages" ToRole="get_type" />
+        </EntityType>
+        <Association Name="FK__get_messa__get_t__3E52440B">
+          <End Type="TelegramGetBotModel.get_type" Role="get_type" Multiplicity="0..1" />
+          <End Type="TelegramGetBotModel.get_messages" Role="get_messages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="get_type">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="get_messages">
+              <PropertyRef Name="get_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -449,6 +503,16 @@ warning 6002: The table/view 'TelegramGetBot.dbo.top_gets' does not have a prima
                 <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="truedankcount" ColumnName="truedankcount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="get_messages">
+            <EntityTypeMapping TypeName="TelegramGetBotModel.get_messages">
+              <MappingFragment StoreEntitySet="get_messages">
+                <ScalarProperty Name="gm_enabled" ColumnName="gm_enabled" />
+                <ScalarProperty Name="get_message" ColumnName="get_message" />
+                <ScalarProperty Name="get_type_id" ColumnName="get_type_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

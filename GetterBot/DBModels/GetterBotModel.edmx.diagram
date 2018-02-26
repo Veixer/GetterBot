@@ -6,9 +6,9 @@
     <edmx:Diagrams>
       <Diagram DiagramId="8045527d02cd486690108f599a10f307" Name="Diagram1">
         <EntityTypeShape EntityType="TelegramGetBotModel.botget" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="TelegramGetBotModel.get_type" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="TelegramGetBotModel.user" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="TelegramGetBotModel.top_gets" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TelegramGetBotModel.get_type" Width="1.5" PointX="0.5" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TelegramGetBotModel.user" Width="1.5" PointX="3.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TelegramGetBotModel.top_gets" Width="1.5" PointX="10.5" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="TelegramGetBotModel.FK__botget__get_type__2A4B4B5E" ManuallyRouted="false" />
         <AssociationConnector Association="TelegramGetBotModel.FK__botget__userid__300424B4" ManuallyRouted="false" />
         <EntityTypeShape EntityType="TelegramGetBotModel.most_getted_type" Width="1.5" PointX="5.375" PointY="0.75" />
@@ -16,6 +16,8 @@
         <EntityTypeShape EntityType="TelegramGetBotModel.most_getted_weekday" Width="1.5" PointX="5.375" PointY="6.75" />
         <EntityTypeShape EntityType="TelegramGetBotModel.most_leetgets" Width="1.5" PointX="7.375" PointY="0.75" />
         <EntityTypeShape EntityType="TelegramGetBotModel.most_truedankgets" Width="1.5" PointX="7.375" PointY="3.75" />
+        <EntityTypeShape EntityType="TelegramGetBotModel.get_messages" Width="1.5" PointX="0.625" PointY="5.25" />
+        <AssociationConnector Association="TelegramGetBotModel.FK__get_messa__get_t__3E52440B" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

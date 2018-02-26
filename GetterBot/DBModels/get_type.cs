@@ -18,6 +18,7 @@ namespace GetterBot.DBModels
         public get_type()
         {
             this.botgets = new HashSet<botget>();
+            this.get_messages = new HashSet<get_messages>();
         }
     
         public int id { get; set; }
@@ -28,5 +29,7 @@ namespace GetterBot.DBModels
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<botget> botgets { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<get_messages> get_messages { get; set; }
     }
 }
